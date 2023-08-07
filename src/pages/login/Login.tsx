@@ -1,7 +1,7 @@
 import React from "react";
 import "./Style.css";
 
-function Login() {
+const Login = () => {
   return (
     <>
       <head>
@@ -31,6 +31,6 @@ function Login() {
       </div>
     </>
   );
-}
+};
 
 export default Login;

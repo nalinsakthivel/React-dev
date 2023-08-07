@@ -1,0 +1,41 @@
+.mainContainer {
+  width: "100%";
+  height: 300px;
+}
+
+.heading {
+  text-align: center;
+  width: "100%";
+  text-shadow: 2px 2px 5px rgb(0, 255, 115);
+}
+
+.inputContainer {
+  margin-left: 20px;
+}
+
+.inputLabel {
+}
+
+.input {
+  margin-left: 20px;
+}
+
+.buttonContainer {
+  margin-left: 40px;
+  margin-top: 20px;
+}
+
+.button {
+  background-color: cornsilk;
+  border-width: 0.5px;
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: aqua;
+  cursor: pointer;
+}

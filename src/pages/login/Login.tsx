@@ -1,65 +1,92 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Style.css";
 import { useForm, Controller } from "react-hook-form";
 import { TextField } from "@material-ui/core";
+import { LoadingButton } from "@mui/lab";
+import { Container } from "@mui/material";
 
 const Login = () => {
+    const [loading, setLoading] = useState<boolean>(false);
     const {
         control,
         handleSubmit,
         formState: { errors },
-    } = useForm({});
-    const onSubmit = (data: any) => console.log(data);
-
+    } = useForm({
+        defaultValues: {
+            firstName: "",
+            password: "",
+        },
+    });
+    const onSubmit = (data: any) => {
+        setLoading(true);
+        console.log({ data });
+        setLoading(false);
+    };
     return (
         <>
-            {/* <head>
-                <title>hello</title>
-            </head>
-            <div className="mainContainer">
-                <h1 className="heading"> Login</h1>
-                <div className="inputContainer">
-                    <h4 className="inputLabel">User Name</h4>
-                    <input className="input" type="text" />
-                </div>
-                <div className="inputContainer">
-                    <h4 className="inputLabel">Password</h4>
-                    <input className="input" type="password" maxLength={8} />
-                </div>
-                <div className="buttonContainer">
-                    <button
-                        className="button"
-                        type="submit"
-
-                        onClick={() => {
-                            console.log("hello :>> ");
+            <Container>
+                <div className="input">
+                    <Controller
+                        name="firstName"
+                        control={control}
+                        rules={{
+                            required: true,
                         }}
-                    >
-                        Submit
-                    </button>
-                </div>
-            </div> */}
-
-            <Controller
-                name="firstName"
-                control={control}
-                rules={{
-                    required: true,
-                }}
-                render={({ field: { onChange, onBlur, value } }: any) => (
-                    <TextField
-                        id="outlined-basic"
-                        label="Name"
-                        variant="outlined"
-                        onChange={onChange}
-                        onBlur={onBlur}
-                        value={value}
-                        placeholder="hello"
+                        render={({
+                            field: { onChange, onBlur, value, name },
+                        }) => (
+                            <TextField
+                                id={name}
+                                label="Name"
+                                variant="outlined"
+                                onChange={onChange}
+                                onBlur={onBlur}
+                                value={value}
+                                placeholder="Name"
+                            />
+                        )}
                     />
-                )}
-            />
-            {errors.firstName && <p className="err">This is required.</p>}
-            <input type="submit" onClick={handleSubmit(onSubmit)} />
+                    {errors.firstName && (
+                        <p className="err">This is required.</p>
+                    )}
+                </div>
+                <div className="input">
+                    <Controller
+                        name="password"
+                        control={control}
+                        rules={{
+                            required: true,
+                        }}
+                        render={({
+                            field: { onChange, onBlur, value, name },
+                        }) => (
+                            <TextField
+                                id={name}
+                                label="Password"
+                                variant="outlined"
+                                onChange={onChange}
+                                onBlur={onBlur}
+                                value={value}
+                                placeholder="Password"
+                                type="password"
+                            />
+                        )}
+                    />
+                    {errors.firstName && (
+                        <p className="err">This is required.</p>
+                    )}
+                </div>
+                <div className="input">
+                    <LoadingButton
+                        size="small"
+                        onClick={handleSubmit(onSubmit)}
+                        loading={loading}
+                        variant="contained"
+                    >
+                        <span>Submit</span>
+                    </LoadingButton>
+                </div>
+            </Container>
         </>
     );
 };
